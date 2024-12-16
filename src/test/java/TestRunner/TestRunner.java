@@ -1,8 +1,9 @@
 package TestRunner;
 
 import FrameworkUtility.BaseClass;
-import com.cucumber.listener.ExtentProperties;
-import com.cucumber.listener.Reporter;
+
+import com.vimalselvam.cucumber.listener.ExtentProperties;
+import com.vimalselvam.cucumber.listener.Reporter;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -18,12 +19,12 @@ import static java.lang.System.getProperty;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 
-        features = {"src/test/resources/featureFiles/"},
+        features = {"src/test/resources/featureFiles_API"},
         glue = {"StepDefinition"},
-        tags = ("@DealCapture"),
+        tags = ("@addBook"),
         monochrome = true,
-        dryRun = false,
-        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:", "pretty", "html:target/cucumber-reports/WebReports/web"}
+        dryRun = false
+        //plugin = {"com.cucumber.listener.ExtentCucumberFormatter:", "pretty", "html:target/cucumber-reports/WebReports/web"}
 )
 
 public class TestRunner {
@@ -31,7 +32,7 @@ public class TestRunner {
     @BeforeClass
     public static void setup() throws IOException {
         //BaseClass baseClass= new BaseClass();
-        BaseClass.executionProperties();
+        BaseClass.setExecutionProperties();
         ExtentProperties extentProperties = ExtentProperties.INSTANCE;
         String timeStamp = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss").format(Calendar.getInstance().getTime()).replaceAll(":", "-");
         String userDir = getProperty("user.dir");
