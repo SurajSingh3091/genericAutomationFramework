@@ -41,7 +41,11 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--Adding the dependencies hear-->
     <dependencies>
+
+        <!--Cucumber dependencies-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -56,24 +60,42 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Rest Assured dependencies for API automation-->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <!--Appium Dependencies for Mobile Automation-->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>5.0.0-BETA6</version>
         </dependency>
 
+        <!--Unit testing framework, could be Junit or TestNG-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!--Selenium dependencies for Web Application automation-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.22.0</version>
         </dependency>
 
+        <!--Reporting dependencies-->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
@@ -82,7 +104,7 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>3.0.2</version>
+            <version>3.1.1</version>
         </dependency>
     </dependencies>
 </project>
