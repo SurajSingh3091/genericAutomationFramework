@@ -18,22 +18,24 @@ public class BaseClass {
     public static boolean isMobileApplication;
 
     static String desktopAppPath;
-    public static String projectLocation;
 
+    public static String endPointUrl;
+    public static String projectLocation;
     static Properties properties;
     public static WebDriver driver;
 
-    public static void executionProperties() {
+    public static void setExecutionProperties() {
         //Reading Properties file
         invokePropertyFile();
         isDesktopApplication = Boolean.parseBoolean(properties.getProperty("isDesktopApplication"));
         isAPI = Boolean.parseBoolean(properties.getProperty("isAPI"));
         isWebApplication = Boolean.parseBoolean(properties.getProperty("isWebApplication"));
+
         if (isDesktopApplication) {
             desktopAppPath = properties.getProperty("desktopApplicationURL");
         }
         if (isAPI) {
-
+            endPointUrl = properties.getProperty("apiEndPoint");
         }
         if(isMobileApplication){
 
