@@ -10,16 +10,16 @@ Feature: To test API
     And user Print no of copies sold by RPA Course
     And finally user Verify if Sum of all Course prices matches with Purchase Amount
 
-  @addBook
+    @addBook
   Scenario: User wants to add, get and the delete the book in Library
     Given User does the pre setup for the library application
     When User adds the book
     Then User validates that book is added successfully
     And Then user deletes the book.
 
-  @CreatebugJira
-  Scenario: User wants to create an Issue and attache all the screenshots
-    Given User does the pre setup for authentication to create bug
-    When User Creates the bug and validates if it is created and then extracts the Id
-    Then User does pre setup for authentication to attach the bug
-    And validates that the attachment is success.
+      @CreatebugJira
+      Scenario: User wants to create an Issue and attache all the screenshots
+        Given User does the pre setup for authentication to create bug
+        When User Creates the bug and validates if it is created and then extracts the Id
+        Then User does pre setup for authentication to attach the bug
+        And validates that the attachment is sccuess.

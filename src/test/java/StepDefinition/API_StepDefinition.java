@@ -2,12 +2,15 @@ package StepDefinition;
 
 
 import FrameworkUtility.BaseClass;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,6 +19,7 @@ public class API_StepDefinition {
 
     Response res;
     JsonPath jsonPath;
+    String jiraId;
 
     RestAssured restAssured;
 
@@ -157,6 +161,62 @@ public class API_StepDefinition {
     public void then_user_deletes_the_book() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+    }
+
+    // Jira API
+    // Authenticating using Bearer Token created using Basic Auth
+    @Given("User does the pre setup for authentication to create bug")
+    public void userDoesThePreSetupForAuthenticationToCreateBug() {
+        RestAssured.baseURI="https://surajsingh855190.atlassian.net/";
+
+    }
+
+    @When("User Creates the bug and validates if it is created and then extracts the Id")
+    public void userCreatesTheBugAndValidatesIfItIsCreatedAndThenExtractsTheId() {
+        response = given().header("Content-Type","application/json")
+                .header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+                .body("{\n" +
+                        "    \"fields\": {\n" +
+                        "       \"project\":\n" +
+                        "       {\n" +
+                        "          \"key\": \"SCRUM\"\n" +
+                        "       },\n" +
+                        "       \"summary\": \"page not found\",\n" +
+                        "       \"issuetype\": {\n" +
+                        "          \"name\": \"Bug\"\n" +
+                        "       }\n" +
+                        "   }\n" +
+                        "}")
+                .post("rest/api/3/issue")
+                .then().log().all().assertThat().statusCode(201)
+                .extract().response().asString();
+        jsonPath = new JsonPath(response);
+        jiraId = jsonPath.getString("id");
+        System.out.println(jiraId);
+    }
+
+    @Then("User does pre setup for authentication to attach the bug")
+    public void userDoesPreSetupForAuthenticationToAttachTheBug() {
+        given().header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+                .header("X-Atlassian-Token","no-check")
+                .pathParam("key",jiraId)//path param, the key in post call will be updated with the value
+                .multiPart("file",new File("C:/Users/surajsingh02/OneDrive - Nagarro/Desktop/Islamic Banking.png"))
+                .post("rest/api/3/issue/{key}/attachments")
+                .then().assertThat().statusCode(200);
+    }
+
+    @And("validates that the attachment is success.")
+    public void validatesThatTheAttachmentIssuccess() {
+        response = given().header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+                .header("Accept","application/json")
+                .pathParam("key",jiraId)
+                .when().get("rest/api/3/issue/{key}")
+                .then().assertThat().statusCode(200)
+                .extract().response().asString();
+        jsonPath= new JsonPath(response);
+        String retrivedId = jsonPath.getString("sub-tasks.id");
+        System.out.println(retrivedId);
+
     }
 }
 

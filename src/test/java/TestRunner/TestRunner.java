@@ -21,7 +21,7 @@ import static java.lang.System.getProperty;
 
         features = {"src/test/resources/featureFiles_API"},
         glue = {"StepDefinition"},
-        tags = ("@addBook"),
+        tags = ("@CreatebugJira"),
         monochrome = true,
         dryRun = false
         //plugin = {"com.cucumber.listener.ExtentCucumberFormatter:", "pretty", "html:target/cucumber-reports/WebReports/web"}
@@ -41,13 +41,13 @@ public class TestRunner {
 
     @AfterClass
     public static void teardown() throws IOException {
-        Reporter.loadXMLConfig(new File(BaseClass.projectLocation + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "Properties" + File.separator + "execution.properties"));
-        Reporter.setSystemInfo("User Name", "Suraj Singh");
-        Reporter.setSystemInfo("Application Name", "GenericApplication");
-        Reporter.setSystemInfo("Operating System Type", getProperty("os.name").toString());
-        Reporter.setSystemInfo("Environment", "SIT");
-        Reporter.setSystemInfo("Platform", "Desktop");
-        Reporter.setSystemInfo("Browser", "Chrome");
-        Reporter.setTestRunnerOutput("Test Execution Cucumber Report");
+//        Reporter.loadXMLConfig(new File(BaseClass.projectLocation + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "Properties" + File.separator + "execution.properties"));
+//        Reporter.setSystemInfo("User Name", "Suraj Singh");
+//        Reporter.setSystemInfo("Application Name", "GenericApplication");
+//        Reporter.setSystemInfo("Operating System Type", getProperty("os.name").toString());
+//        Reporter.setSystemInfo("Environment", "SIT");
+//        Reporter.setSystemInfo("Platform", "Desktop");
+//        Reporter.setSystemInfo("Browser", "Chrome");
+//        Reporter.setTestRunnerOutput("Test Execution Cucumber Report");
     }
 }
