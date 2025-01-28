@@ -1,4 +1,7 @@
 Create an API token
+
+https://id.atlassian.com/manage-profile/security/api-tokens
+
 API tokens with an infinite lifespan pose a data security risk. To improve data security, by default we set API tokens to expire in one year. When you create an API token, you can set the expiration date to be from 1 day up to one year. 
 
 Create an API token from your Atlassian account:
@@ -18,3 +21,8 @@ Select Create.
 Select Copy to clipboard, then paste the token to your script, or save it somewhere safe.
 
 You can't recover the API token after you’re done with this step. We recommend you save your API token in a password manager.
+
+
+API Token: surajsingh85519@gmail.com:ATATT3xFfGF0EmYUA3oSUbdbofkyUmCwxqj9JpfMWGF_ck3WO97QjSLyyIk-E5E-TJH0p0xsb5bQi8aDpbghUED7cm8Q7G8AnaT-p47JtFcEkTb8piCtw2Ngbhl0GN69OAt7ZrN2JxeSYn3JLts2uEk7SEpgUuWL-xJ6C9-7u7-9i_89v6NS59U=046911A7
+
+Base64: Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=

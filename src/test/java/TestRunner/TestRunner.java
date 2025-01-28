@@ -21,7 +21,7 @@ import static java.lang.System.getProperty;
 
         features = {"src/test/resources/featureFiles_API"},
         glue = {"StepDefinition"},
-        tags = ("@CreatebugJira"),
+        tags = ("@serializationConcept"),
         monochrome = true,
         dryRun = false
         //plugin = {"com.cucumber.listener.ExtentCucumberFormatter:", "pretty", "html:target/cucumber-reports/WebReports/web"}

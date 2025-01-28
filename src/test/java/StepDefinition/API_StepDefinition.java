@@ -1,6 +1,8 @@
 package StepDefinition;
 
 
+import ApiPOJOClasses.AddProduct;
+import ApiPOJOClasses.Data;
 import FrameworkUtility.BaseClass;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -167,14 +169,14 @@ public class API_StepDefinition {
     // Authenticating using Bearer Token created using Basic Auth
     @Given("User does the pre setup for authentication to create bug")
     public void userDoesThePreSetupForAuthenticationToCreateBug() {
-        RestAssured.baseURI="https://surajsingh855190.atlassian.net/";
+        RestAssured.baseURI = "https://surajsingh855190.atlassian.net/";
 
     }
 
     @When("User Creates the bug and validates if it is created and then extracts the Id")
     public void userCreatesTheBugAndValidatesIfItIsCreatedAndThenExtractsTheId() {
-        response = given().header("Content-Type","application/json")
-                .header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+        response = given().header("Content-Type", "application/json")
+                .header("Authorization", "Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
                 .body("{\n" +
                         "    \"fields\": {\n" +
                         "       \"project\":\n" +
@@ -197,26 +199,67 @@ public class API_StepDefinition {
 
     @Then("User does pre setup for authentication to attach the bug")
     public void userDoesPreSetupForAuthenticationToAttachTheBug() {
-        given().header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
-                .header("X-Atlassian-Token","no-check")
-                .pathParam("key",jiraId)//path param, the key in post call will be updated with the value
-                .multiPart("file",new File("C:/Users/surajsingh02/OneDrive - Nagarro/Desktop/Islamic Banking.png"))
+        given().header("Authorization", "Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+                .header("X-Atlassian-Token", "no-check")
+                .pathParam("key", jiraId)//path param, the key in post call will be updated with the value
+                .multiPart("file", new File("C:/Users/surajsingh02/OneDrive - Nagarro/Desktop/Islamic Banking.png"))
                 .post("rest/api/3/issue/{key}/attachments")
                 .then().assertThat().statusCode(200);
     }
 
     @And("validates that the attachment is success.")
     public void validatesThatTheAttachmentIssuccess() {
-        response = given().header("Authorization","Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
-                .header("Accept","application/json")
-                .pathParam("key",jiraId)
+        response = given().header("Authorization", "Basic c3VyYWpzaW5naDg1NTE5QGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBFbVlVQTNvU1ViZGJvZmt5VW1Dd3hxajlKcGZNV0dGX2NrM1dPOTdRalNMeXlJay1FNUUtVEpIMHAweHNiNWJRaThhRHBiZ2hVRUQ3Y204UTdHOEFuYVQtcDQ3SnRGY0VrVGI4cGlDdHcyTmdiaGwwR042OU9BdDdack4ySnhlU1luM0pMdHMydUVrN1NFcGdVdVdMLXhKNkM5LTd1Ny05aV84OXY2TlM1OVU9MDQ2OTExQTc=")
+                .header("Accept", "application/json")
+                .pathParam("key", jiraId)
                 .when().get("rest/api/3/issue/{key}")
                 .then().assertThat().statusCode(200)
                 .extract().response().asString();
-        jsonPath= new JsonPath(response);
+        jsonPath = new JsonPath(response);
         String retrivedId = jsonPath.getString("sub-tasks.id");
         System.out.println(retrivedId);
 
     }
+
+    @Given("^user does the pre setup with end Point url as \"([^\"]*)\"$")
+    public void user_does_the_pre_setup(String endPoint) {
+        RestAssured.baseURI = endPoint;
+    }
+
+    AddProduct addProduct = new AddProduct();
+
+    @When("^user sets the input payload name as \"([^\"]*)\"$")
+    public void user_sets_the_input_payload_name_as(String name) {
+        addProduct.setName(name);
+    }
+
+    Data data = new Data();
+
+    @Then("^user sets the specification Data year as \"([^\"]*)\" price as \"([^\"]*)\" model as \"([^\"]*)\" disk size as \"([^\"]*)\"$")
+    public void user_sets_the_specification_data_year_as_price_as_model_as_disk_size_as(int year, double price, String model, String diskSize) {
+        data.setYear(year);
+        data.setPrice(price);
+        data.setCPUmodel(model);
+        data.setHardDiskSize(diskSize);
+        addProduct.setData(data);
+    }
+
+    @Then("^user posts the payload with Path Param as \"([^\"]*)\" and extracts the response$")
+    public void user_posts_the_payload_and_extracts_the_response(String pathParam) {
+        String response = given().log().all()
+                .header("Content-Type","application/json")
+                .body(addProduct)
+                .when().post(pathParam)
+                .then().assertThat()
+                .statusCode(200)
+                .extract().response().asString();
+        JsonPath jsp= new JsonPath(response);
+        System.out.println("ID: "+jsp.getString("id"));
+        System.out.println("Name: "+jsp.getString("name"));
+        System.out.println("Created Date: "+jsp.getString("createdAt"));
+
+    }
+
+
 }
 
